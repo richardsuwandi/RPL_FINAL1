@@ -1,3 +1,15 @@
+<?php
+session_start();
+require_once "db.php";
+$pdo = new db();
+
+$signed = false;
+if(isset($_SESSION['email']) == 1){
+    $signed = true;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -27,9 +39,23 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
+                        <?php
+                            if ($signed == false){
+                        ?>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.php">Login Admin</a></li>
+                        <?php
+                            }
+                            else{
+                        ?>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="input_barang.php">Input Data</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.php">Logout</a></li>
+                        <?php
+                            }
+                        ?>
                     </ul>
                 </div>
             </div>
