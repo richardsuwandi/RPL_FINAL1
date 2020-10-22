@@ -41,7 +41,7 @@
     <section class="page-section bg-light text-black">  
         <div class="container">
             <div class="row">
-				<div class="col-md-4">
+				<div class="col-md">
 					<div class="card" style="width: 18rem;">
 						<img src="assets/img/asus1.jpg" style="width: 18rem;" class="card-img-top">
 						<div class="card-body">
@@ -50,8 +50,16 @@
 						</div>
 					</div>
                 </div>
-                <div class="row">
-				<div class="col-md-4">
+				<div class="col-md">
+					<div class="card" style="width: 18rem;">
+						<img src="assets/img/asus2.jpg" style="width: 18rem;" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">Laptop ASUS TUF Gaming FX-505DD</h5>
+							<a href="info_barang.php" class="btn btn-primary">see</a>
+						</div>
+					</div>
+                </div>
+				<div class="col-md">
 					<div class="card" style="width: 18rem;">
 						<img src="assets/img/asus2.jpg" style="width: 18rem;" class="card-img-top">
 						<div class="card-body">
@@ -63,7 +71,7 @@
             </div>
         </div>
     </section>
-    <!-- Akhir informasi cafe -->
+    <!-- Akhir informasi barang -->
 
     <!-- Awal Footer-->
     <footer class="bg-light py-5 text-center">
