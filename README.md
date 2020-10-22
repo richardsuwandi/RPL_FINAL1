@@ -1,9 +1,5 @@
 # OPTO Comp Website untuk RPL
 
-Sisa:
-- search.php
-- info_barang.php
-
 *Di update dulu system.sql nya karena ada perubahan.
 
 Login admin:
