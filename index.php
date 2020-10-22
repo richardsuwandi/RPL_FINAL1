@@ -44,7 +44,7 @@ if(isset($_SESSION['email']) == 1){
                         ?>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.php">Login Admin</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login_admin.php">Login Admin</a></li>
                         <?php
                             }
                             else{
@@ -52,7 +52,7 @@ if(isset($_SESSION['email']) == 1){
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="input_barang.php">Input Data</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.php">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login_admin.php">Logout</a></li>
                         <?php
                             }
                         ?>
