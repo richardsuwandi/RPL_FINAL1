@@ -1,3 +1,16 @@
+<?php
+session_start();
+require_once "db.php";
+$pdo = new db();
+
+$signed = false;
+if(isset($_SESSION['email']) == 1){
+    $signed = true;
+}
+
+$cookie_name = "search"; 
+?>
+
 <!doctype html>
 <style>
     .nav-item{
@@ -26,11 +39,25 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="index.php">Home</a>
                 </li>
+                <?php
+                    if($signed == false){
+
+                ?>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="login_admin.php">Login</a>
                 </li>
+                <?php
+                    }
+                    else{
+                ?>
+                <li class="nav-item active">
+                    <a class="nav-link" href="logout.php">Logout</a>
+                </li>
+                <?php
+                    }
+                ?>
                 </ul>
             </div>
         </div>
@@ -41,33 +68,28 @@
     <section class="page-section bg-light text-black">  
         <div class="container">
             <div class="row">
+                <?php
+                if(!isset($_COOKIE[$cookie_name])){
+                    echo "Error saat terjadi search";
+                }
+                else{ 
+                    $search_row = $pdo -> search_barang($_COOKIE[$cookie_name]);
+                }
+
+                foreach ($search_row as $row){
+                ?>
 				<div class="col-md">
 					<div class="card" style="width: 18rem;">
-						<img src="assets/img/asus1.jpg" style="width: 18rem;" class="card-img-top">
+						<img src="<?= $row['gambar_barang1'] ?>" style="width: 18rem;" class="card-img-top">
 						<div class="card-body">
-							<h5 class="card-title">Laptop ASUS TUF Gaming FX-505DD</h5>
-							<a href="info_barang.php" class="btn btn-primary">see</a>
+							<h5 class="card-title"><?= $row['nama_barang'] ?></h5>
+							<a href="info_barang.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Lihat</a>
 						</div>
 					</div>
                 </div>
-				<div class="col-md">
-					<div class="card" style="width: 18rem;">
-						<img src="assets/img/asus2.jpg" style="width: 18rem;" class="card-img-top">
-						<div class="card-body">
-							<h5 class="card-title">Laptop ASUS TUF Gaming FX-505DD</h5>
-							<a href="info_barang.php" class="btn btn-primary">see</a>
-						</div>
-					</div>
-                </div>
-				<div class="col-md">
-					<div class="card" style="width: 18rem;">
-						<img src="assets/img/asus2.jpg" style="width: 18rem;" class="card-img-top">
-						<div class="card-body">
-							<h5 class="card-title">Laptop ASUS TUF Gaming FX-505DD</h5>
-							<a href="info_barang.php" class="btn btn-primary">see</a>
-						</div>
-					</div>
-                </div>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </section>
@@ -75,7 +97,7 @@
 
     <!-- Awal Footer-->
     <footer class="bg-light py-5 text-center">
-        <div class="container"><div class="small text-center text-muted">Copyright © 2020 - Odading Teams</div></div>
+        <div class="container"><div class="small text-center text-muted">Copyright © 2020 - OPTO Computer</div></div>
     </footer>
     <!-- Akhir Footer -->
 
