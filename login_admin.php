@@ -37,12 +37,11 @@
             <div class="col-sm-8">
                 <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password">
             </div>
-        </div>
+        </div><br>
         <div class="form-group row">
             <div class="col-sm-12">
                 <button type="submit" name="submit" class="btn btn-primary">Sign in</button><br>
                 <br>
-                <p>Tidak punya akun?</p><a href="/signup.php">Sign up</a>
             </div>
         </div>
         </form>
