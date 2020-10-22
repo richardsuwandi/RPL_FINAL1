@@ -125,7 +125,7 @@ if (isset($_GET['id'])){
 
     <!-- Awal Footer-->
     <footer class="bg-light py-5 text-center">
-        <div class="container"><div class="small text-center text-muted">Copyright © 2020 - Odading Teams</div></div>
+        <div class="container"><div class="small text-center text-muted">Copyright © 2020 - OPTO Computer</div></div>
     </footer>
     <!-- Akhir Footer -->
 
