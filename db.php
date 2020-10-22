@@ -20,16 +20,17 @@ class db{
     }
 
     // Fungsi untuk menambah data ke tabel barang
-    public function membuat_barang($nama_barang, $spesifikasi_barang1, $spesifikasi_barang2, $gambar_barang1, $gambar_barang2){
-        $sql = "INSERT INTO barang (nama_barang, spesifikasi_barang1, spesifikasi_barang2, gambar_barang1, gambar_barang2)
-        VALUES (:nama_barang, :spesifikasi_barang1, :spesifikasi_barang2, :gambar_barang1, :gambar_barang2)";
+    public function membuat_barang($nama_barang, $spesifikasi_barang1, $spesifikasi_barang2, $gambar_barang1, $gambar_barang2, $harga){
+        $sql = "INSERT INTO barang (nama_barang, spesifikasi_barang1, spesifikasi_barang2, gambar_barang1, gambar_barang2, harga)
+        VALUES (:nama_barang, :spesifikasi_barang1, :spesifikasi_barang2, :gambar_barang1, :gambar_barang2, :harga)";
         $query = $this -> pdo -> prepare($sql);
         $query -> execute(array(
             ':nama_barang' => $nama_barang,
             ':spesifikasi_barang1' => $spesifikasi_barang1,
             ':spesifikasi_barang2' => $spesifikasi_barang2,
             ':gambar_barang1' => $gambar_barang1,
-            ':gambar_barang2' => $gambar_barang2));
+            ':gambar_barang2' => $gambar_barang2,
+            ':harga' => $harga));
         return $query;
     }
 
@@ -43,7 +44,7 @@ class db{
     }
 
     public function get_barang($barang){
-        $sql = "SELECT * FROM barang WHERE barang = :zip";
+        $sql = "SELECT * FROM barang WHERE id = :zip";
         $stmt = $this -> pdo ->prepare($sql);
         $stmt->execute(array(':zip' => $barang));
         return $stmt -> fetch();

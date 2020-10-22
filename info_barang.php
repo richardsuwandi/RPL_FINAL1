@@ -1,3 +1,30 @@
+<?php
+session_start();
+require_once "db.php";
+$pdo = new db();
+$signed = false;
+
+$signed = false;
+if(isset($_SESSION['email']) == 1){
+    $signed = true;
+}
+
+function error_php(){
+  header("Location: index.php");
+}
+set_error_handler('error_php');
+
+if (isset($_GET['id'])){
+  $info_barang = $pdo -> get_barang($_GET['id']);
+  $id_barang = $info_barang['id'];
+  $nama = $info_barang['nama_barang'];
+  $spesifikasisatu = $info_barang['spesifikasi_barang1'];
+  $spesifikasidua = $info_barang['spesifikasi_barang2'];
+  $gambar = $info_barang['gambar_barang1'];
+  $gambardua = $info_barang['gambar_barang2'];
+  $harga = $info_barang['harga'];
+}
+?>
 <!doctype html>
 <style>
     .nav-item{
@@ -26,11 +53,24 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="index.php">Home</a>
                 </li>
+                <?php
+                    if($signed == false){
+                ?>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="login_admin.php">Login</a>
                 </li>
+                <?php
+                    }
+                    else{
+                ?>
+                <li class="nav-item active">
+                    <a class="nav-link" href="logout.php">Logout</a>
+                </li>
+                <?php
+                    }
+                ?>
                 </ul>
             </div>
         </div>
@@ -46,10 +86,10 @@
             </ol>
             <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-                <center><img class="img-fluid" src="assets/img/asus1.jpg" width="400rem"; alt="Responsive image"></center>
+                <center><img class="img-fluid" src="<?= $gambar ?>" width="400rem"; alt="Responsive image"></center>
             </div>
             <div class="carousel-item">
-                <center><img class="img-fluid" src="assets/img/asus2.jpg" width="400rem"; alt="Responsive image"></center>
+                <center><img class="img-fluid" src="<?= $gambardua ?>" width="400rem"; alt="Responsive image"></center>
             </div>
             </div>
             <br>
@@ -73,14 +113,11 @@
     <section class="page-section bg-dark text-white">
         <div class="container">
             <br><br>
-            <h4>Laptop ASUS TUF Gaming FX-505DD</h4>
+            <h4><?= $nama ?></h4>
             <h5>Spesifikasi :</h5>
-            <p class="text-justify"> Display : 15.6" FHD Slim IPS 120Hz 1920x1080 16:9
-                Processor : AMD Ryzen™ 5-3550H Processor 2.1GHz (6M cache, up to 3.7GHz)
-                Memory : RAM 8GB DDR4
-                Hard Drive : 1TB HDD
-                Graphics : NVIDIA GeForce GTX 1050 3GB GDDR5</p>
-            <h5>Harga : Rp. 9.000.000,-</h5>
+            <p class="text-justify"><?= $spesifikasisatu ?></p>
+            <p class="text-justify"><?= $spesifikasidua ?></p>
+            <h5>Harga : Rp. <?= $harga ?></h5>
             <br><br>
         </div>
     </section>

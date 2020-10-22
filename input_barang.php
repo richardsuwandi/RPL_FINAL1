@@ -31,7 +31,7 @@ if(isset($_POST['submit'])){
   else{
     if (move_uploaded_file($_FILES["image_upload"]["tmp_name"], $target)) {
       if (move_uploaded_file($_FILES["image_upload_dua"]["tmp_name"], $targetdua)) {
-          $pdo -> membuat_barang($_POST['nama_barang'], $_POST['spesifikasi_barang1'], $_POST['spesifikasi_barang2'],  $target, $targetdua);
+          $pdo -> membuat_barang($_POST['nama_barang'], $_POST['spesifikasi_barang1'], $_POST['spesifikasi_barang2'],  $target, $targetdua, $_POST['harga']);
           header("Location: index.php");
       }
       
@@ -48,7 +48,7 @@ if(isset($_POST['submit'])){
 <html>
 <style>
   body{
-        background-image : url("gambar/latar_input_cafe.jpg");
+        background-image : url("");
         background-size : cover;
         padding:25px;
       }
@@ -92,7 +92,11 @@ if(isset($_POST['submit'])){
             <label>Spesifikasi Barang 2 (lanjutan) :</label>
             <input type="text" class="form-control" name="spesifikasi_barang2" placeholder="Spesifikasi Barang (lanjutan)">
           </div>
-          <!-- upload photo cafe -->
+          <div class="form-group col-md-8 offset-2">
+            <label>Harga :</label>
+            <input type="text" class="form-control" name="harga" placeholder="Harga">
+          </div>
+          <!-- upload photo barang -->
           <div class="form-group col-md-8 offset-2">
             <label>Upload photo</label>
             <input type="file" class="form-control" name="image_upload" id="image_upload" required>

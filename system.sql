@@ -8,6 +8,7 @@ CREATE TABLE `barang` (
   `spesifikasi_barang2` varchar(255) DEFAULT NULL,
   `gambar_barang1` varchar(255) DEFAULT NULL,
   `gambar_barang2` varchar(255) DEFAULT NULL,
+  `harga` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=UTF8;
 
