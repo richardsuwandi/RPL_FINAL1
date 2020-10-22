@@ -1,4 +1,40 @@
-<!doctype html>
+<?php
+session_start();
+require_once "db.php";
+$pdo = new db();
+
+// Jika user sudah login dan membuka ini, maka akan langsung terpindah ke index.php
+if(!isset($_SESSION['email']) == 0 ){
+    header('Location: index.php');
+}
+
+if(isset($_POST['submit'])){
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    //Mengecek apakah loginnya cocok dengan database
+    $login = $pdo -> login($_POST['email']);
+
+    //Mengecek apakah password cocok
+    if (password_verify($_POST['password'], $login['password'])){
+        //Memasukkan data ke session
+        $id = $login['id'];
+        $_SESSION['id'] = $login['id'];
+        $_SESSION['name'] = $login['name'];
+        $_SESSION['email'] = $email;
+        $_SESSION['nomortelepon'] = $login['nomor_telepon'];
+        setcookie('user_id', $id, time()+(7 * 24 * 60 * 60), '/');
+        header("Location: index.php");
+    }
+    //Pesan error jika e-mail atau password salah
+    else{
+        
+        echo("E-mail atau password salah, silahkan ulangi kembali");
+    }
+}
+?>
+
+<!DOCTYPE html>
 <html lang="en">
     <style>
     body{

@@ -3,17 +3,19 @@ session_start();
 require_once "db.php";
 $pdo = new db();
 
+// Jika admin belum login, maka akan langsung terpindah ke login.php
+if(isset($_SESSION['email']) == 0){
+  header('Location: login_admin.php');
+}
+
 if(isset($_POST['submit'])){ 
-  /* Gambar Pertama */
   $upload = 1; 
-  // Target gambar disimpan
-  $target = "assets/img" . time() . '_' . uniqid() . '.' . basename($_FILES["image_upload"]["name"]);
-  $targetdua = "assets/img" . time() . '_' . uniqid() . '.' . basename($_FILES["image_upload_dua"]["name"]);
-  // Mengambil informasi extension
+  $target = "assets/img/" . uniqid() . '.' . basename($_FILES["image_upload"]["name"]);
+  $targetdua = "assets/img/" . uniqid() . '.' . basename($_FILES["image_upload_dua"]["name"]);
+  
   $image_type = strtolower(pathinfo($target,PATHINFO_EXTENSION));
   $image_type_dua = strtolower(pathinfo($targetdua,PATHINFO_EXTENSION));
 
-  // Mengecek gambar apakah sesuai aturan
   if($image_type != "jpg" && $image_type != "png" && $image_type != "jpeg") {
     echo "Format gambar yang diperbolehkan adalah JPG, PNG dan JPEG!";
     $upload = 0;
@@ -22,6 +24,23 @@ if(isset($_POST['submit'])){
     echo "Format gambar yang diperbolehkan adalah JPG, PNG dan JPEG!";
     $upload = 0;
   }
+
+  if ($upload == 0) {
+    echo "Gambar tidak terupload!";
+  } 
+  else{
+    if (move_uploaded_file($_FILES["image_upload"]["tmp_name"], $target)) {
+      if (move_uploaded_file($_FILES["image_upload_dua"]["tmp_name"], $targetdua)) {
+          $pdo -> membuat_barang($_POST['nama_barang'], $_POST['spesifikasi_barang1'], $_POST['spesifikasi_barang2'],  $target, $targetdua);
+          header("Location: index.php");
+      }
+      
+      // Masukkan gambar ke dalam database dan redirect kembali ke admin
+    } 
+    else {
+      echo "Terjadi kesalahan dalam mengupload";
+    }
+  } 
 }
 ?>
 

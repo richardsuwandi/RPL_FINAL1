@@ -8,6 +8,12 @@ if(isset($_SESSION['email']) == 1){
     $signed = true;
 }
 
+if (isset($_GET['search'])){
+    $cookie_name = "search";
+    $cookie_value = htmlentities($_GET['input_search']);
+    setcookie($cookie_name, $cookie_value, strtotime('+1 day'), '/');
+    header("Location: search.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +58,7 @@ if(isset($_SESSION['email']) == 1){
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="input_barang.php">Input Data</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login_admin.php">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="logout.php">Logout</a></li>
                         <?php
                             }
                         ?>

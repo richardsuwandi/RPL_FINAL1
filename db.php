@@ -45,7 +45,15 @@ class db{
     public function get_barang($barang){
         $sql = "SELECT * FROM barang WHERE barang = :zip";
         $stmt = $this -> pdo ->prepare($sql);
-        $stmt->execute(array(':zip' => $cafe));
+        $stmt->execute(array(':zip' => $barang));
         return $stmt -> fetch();
+    }
+
+    public function login($email){
+        $sql = "SELECT * FROM account WHERE email = :email";
+        $stmt = $this -> pdo -> prepare($sql);
+        $stmt -> bindParam(':email', $email);
+        $stmt -> execute();
+        return $stmt -> fetch(PDO::FETCH_ASSOC);
     }
 }
